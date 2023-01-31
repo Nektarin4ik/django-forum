@@ -1,0 +1,37 @@
+body{
+    overflow: hidden;
+}
+
+.main {
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+}
+
+.content{
+    height: fit-content;
+    font-family: Sans-Serif;
+    width: 50%;
+    margin: 20px auto 5px;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px #3ca3c1;
+}
+
+.footer{
+    border-top: 3px solid black;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.text {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    font-family: Sans-Serif;
+    margin-left: 10px;
+}
+

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css_add %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+{% block title %} Начало {% endblock %}
+{% block header %}
+        <div class="header">
+            <div class="header-title">
+                <h1><a href="{% url 'basepage:index' %}">Синемария - форум по обсуждению фильмов и аниме</a></h1>
+            </div>
+            <div class="panel" >
+                <div class="panel-text" >
+                    <h2><a href="{% url 'basepage:top_week' %}">Топ-недели</a></h2>
+                    <hr>
+                    <h2> Фильмы</h2>
+                    <hr>
+                    <h2><a href="{% url 'animepage:anime' %}">Аниме</a></h2>
+                    <hr>
+                    <h2><a href="
+                    {% if user.is_authenticated %} {% url 'users:profile' user.id %} {% else %} {% url 'users:login' %} {% endif %}
+                                    ">
+                        {% if user.is_authenticated %} {{user.username }} {% else %} Войти {% endif %}
+                    </a></h2>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+{% block content %}
+<div class="categories">
+        {% for category in categories %}
+        <p class="p-cat"><a href="{% url 'filmspage:film_filter' category.id %}">  {{ category.name }} </a></p>
+        {% endfor %}
+    </div>
+<div class="main">
+    <div class="hello">
+             <h3>
+                 Фильмы: <hr> Поделитесь своим мнением о фильме или аниме которое вы посмотрели
+             </h3>
+        <div class="anime">{% for film in object_list %}
+                <div class="one-anime">
+            <a href="{% url 'filmspage:one_film' film.id %}"> <img class="picture" src="/media/{{ film.image }}"></a>
+            <h3> {{ film.cinema }}</h3>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

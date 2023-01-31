@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css_add %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+{% block title %} Anime {% endblock %}
+{% block header %}
+<div class="header">
+            <div class="header-title">
+                <h1><a href="{% url 'basepage:index' %}">Синемария - форум по обсуждению фильмов и аниме</a></h1>
+            </div>
+        <div class="panel" >
+            <div class="panel-text" >
+                <h2>Топ-недели</h2>
+                <hr>
+                <h2><a href="{% url 'filmspage:films' %}"> Фильмы</a></h2>
+                <hr>
+                <h2><a href="{% url 'animepage:anime' %}">Аниме</a></h2>
+                <hr>
+                <h2><a href="
+                    {% if user.is_authenticated %} {% url 'users:profile' user.id %}
+                    {% else %} {% url 'users:login' %} {% endif %}">
+                        {% if user.is_authenticated %} {{user.username }} {% else %} Войти {% endif %}
+                    </a></h2>
+            </div>
+</div>
+</div>
+{% endblock %}
+{% block content %}
+  <div class="rating">    <h2>
+        Оставьте ваш рейтинг:
+    </h2>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-style">
+                {{ field }}
+            </div>
+        {% endfor %}
+        <button type="submit">Отправить</button></div>
+{% endblock %}

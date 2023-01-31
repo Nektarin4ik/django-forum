@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css_add %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+{% block title %} Авторизация {% endblock %}
+{% block header %}
+<div class="header">
+            <div class="header-title">
+                <h1><a href="{% url 'basepage:index' %}">Синемария - форум по обсуждению фильмов и аниме</a></h1>
+            </div>
+        <div class="panel" >
+            <div class="panel-text" >
+                <h2>Топ-недели</h2>
+                <hr>
+                <h2><a href="{% url 'filmspage:films' %}"> Фильмы</a></h2>
+                <hr>
+                <h2><a href="{% url 'animepage:anime' %}">Аниме</a></h2>
+                <hr>
+                <h2>Личный кабинет</h2>
+            </div>
+</div>
+</div>
+{% endblock %}
+{% block content %}
+    <form action="{% url 'users:login' %}" class="form"  method="post">
+        {% csrf_token %}
+            <div class="form-row">
+                <div class="rows">
+                    <label for="{{ form.username.id_for_label }}"></label>
+                        {{ form.username }}
+                </div>
+                <div class="rows">
+                    <label for="{{ form.password.id_for_label }}"></label>
+                        {{ form.password }}
+                </div>
+                <div>
+                    <input class="submit_class" type="submit" value="Авторизоваться">
+                    <div class="un_acc"><a class="a_un_acc" href="{% url 'users:register' %}">Нет аккаунта? Зарегистрируйся!</a></div>
+                </div>
+            </div>
+    </form>
+{% endblock %}

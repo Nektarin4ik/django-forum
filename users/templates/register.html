@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css_add %}
+<link rel="stylesheet" href="{% static 'css/registration.css' %}">
+{% endblock %}
+{% block title %} Регистрация {% endblock %}
+{% block header %}
+<div class="header">
+            <div class="header-title">
+                <h1><a href="{% url 'basepage:index' %}">Синемария - форум по обсуждению фильмов и аниме</a></h1>
+            </div>
+        <div class="panel" >
+            <div class="panel-text" >
+                <h2>Топ-недели</h2>
+                <hr>
+                <h2><a href="{% url 'filmspage:films' %}"> Фильмы</a></h2>
+                <hr>
+                <h2><a href="{% url 'animepage:anime' %}">Аниме</a></h2>
+                <hr>
+                <h2>Личный кабинет</h2>
+            </div>
+</div>
+</div>
+{% endblock %}
+{% block content %}
+<div class="register_form">
+    <form action="{% url 'users:register' %}" class="form" method="post" >
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="rows">
+                <label for="{{ form.first_name.id_for_label }}"></label>
+                    {{ form.first_name }}
+            </div>
+            <div class="rows">
+                <label for="{{ form.last_name.id_for_label }}"></label>
+                    {{ form.last_name }}
+            </div>
+            <div class="rows">
+                <label for="{{ form.username.id_for_label }}"></label>
+                    {{ form.username }}
+            </div>
+            <div class="rows">
+                <label for="{{ form.email.id_for_label }}"></label>
+                    {{ form.email }}
+            </div>
+            <div class="rows">
+                <label for="{{ form.password1.id_for_label }}"></label>
+                    {{ form.password1 }}
+            </div>
+            <div class="rows">
+                <label for="{{ form.password2.id_for_label }}"></label>
+                    {{ form.password2 }}
+            </div>
+            <div>
+                <input class="submit_class" type="submit" value="Создать аккаунт">
+            </div>
+
+        </div>
+    </form>
+</div>
+{% endblock %}

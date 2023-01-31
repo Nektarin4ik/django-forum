@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css_add %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+{% block title %} Films {% endblock %}
+{% block header %}
+<div class="header">
+            <div class="header-title">
+                <h1><a href="{% url 'basepage:index' %}">Синемария - форум по обсуждению фильмов и аниме</a></h1>
+            </div>
+        <div class="panel" >
+            <div class="panel-text" >
+                <h2>Топ-недели</h2>
+                <hr>
+                <h2><a href="{% url 'filmspage:films' %}"> Фильмы</a></h2>
+                <hr>
+                <h2><a href="{% url 'animepage:anime' %}">Аниме</a></h2>
+                <hr>
+                <h2><a href="
+                    {% if user.is_authenticated %} {% url 'users:profile' user.id %}
+                    {% else %} {% url 'users:login' %} {% endif %}">
+                        {% if user.is_authenticated %} {{user.username }} {% else %} Войти {% endif %}
+                    </a></h2>
+            </div>
+</div>
+</div>
+{% endblock %}
+{% block content %}
+    <div class="object">
+        <img class="picture" src="/media/{{ films.image }}">
+        <h3>{{ films.cinema }} | Рейтинг сайта: {{ films.rating }} | {% if user.is_authenticated %} {% if OneRatingFilm %} Ваша оценка:
+            {{OneRatingFilm}} | Изменить оценку:
+                    <form action="{% url 'filmspage:create_rating' films.id %}" method="post" >
+                        {% csrf_token %}
+                            <div class="comms">
+                                {{ rating_form }}
+                            </div>
+                        <button type="submit">Изменить оценку</button>
+                    </form>
+            {% else %} Оценить:
+                            <form action="{% url 'filmspage:create_rating' films.id %}" method="post" >
+                                {% csrf_token %}
+                                    <div class="comms">
+                                        {{ rating_form }}
+                                     </div>
+                                <button type="submit">Добавить оценку</button>
+                            </form> </h3>
+                        {% endif %}
+        {% endif %}
+    </div>
+
+    </form>
+<h2> Комментарии пользователей: ({{films.CommentsFilm_Films.all.count}})</h2>
+        {% for comment in films.CommentsFilm_Films.all %}
+        <hr>
+        {{ comment.user.username }}: {{ comment }}
+        {% endfor %}
+    <form  method="post">
+        {% csrf_token %}
+
+            <div class="comms">
+                    {{ form }}
+            </div>
+        <button type="submit">Добавить комментарий</button>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %}    </title>
+            {% block css_add %}  {% endblock %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+    <link rel="stylesheet" href="{% static 'js/script.js' %}">
+
+</head>
+<body>
+    {% block header %} {% endblock %}
+    {% block content %} {% endblock %}
+<!--        <div class="footer">-->
+<!--            <div class="text">-->
+<!--                     <p>Номер телефона: +79198807420</p>-->
+<!--                <hr>-->
+<!--                     <p><a href="https://t.me/Nektarin4ik">Телеграмм: @Nektarin4ik </a></p>-->
+<!--                <hr>-->
+<!--                     <p><a href="https://vk.com/0nektarin4ik0">Вконтакте: https://vk.com/0nektarin4ik0</a></p>-->
+
+<!--            </div>-->
+<!--        </div>-->
+</body>
+</html>

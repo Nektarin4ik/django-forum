@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css_add %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+{% block title %} Начало {% endblock %}
+    {% block header %}
+            <div class="header">
+                <div class="header-title">
+                        <h1>Синемария - форум по обсуждению фильмов и аниме</h1>
+                </div>
+                    <div class="panel" >
+                        <div class="panel-text">
+                        <h2><a href="{% url 'basepage:top_week' %}">Топ-недели</a></h2>
+                        <hr>
+                        <h2><a href="{% url 'filmspage:films' %}"> Фильмы</a></h2>
+                        <hr>
+                        <h2><a href="{% url 'animepage:anime' %}">Аниме</a></h2>
+                        <hr>
+                        <h2><a href="{% if user.is_authenticated %} {% url 'users:profile' user.id %} {% else %} {% url 'users:login' %} {% endif %}">
+                            {% if user.is_authenticated %} Личный кабинет | {{user.username }} {% else %} Личный кабинет | Войти {% endif %}
+                        </a></h2>
+                </div>
+            </div>
+                </div>
+    {% endblock %}
+{% block content %}
+<div class="main">
+    <div class="hello">
+             <h3>
+                 Добро пожаловать! <hr> Поделитесь своим мнением о фильме или аниме которое вы посмотрели
+             </h3>
+    </div>
+</div>
+
+{% endblock %}
